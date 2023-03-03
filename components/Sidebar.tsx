@@ -8,6 +8,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 
+import { auth } from '../config/firebase';
+
 const StyledContainer = styled.div`
     height: 100vh;
     min-width: 300px;
@@ -57,6 +59,13 @@ const StyledUserAvatar = styled(Avatar)`
 `;
 
 export default function Sidebar() {
+const logout = async () => {
+        try {
+            await auth.signOut();
+        } catch (error) {
+            console.log(error);
+        }
+}
     return (
         <StyledContainer>
             <StyledHeader>
@@ -70,7 +79,7 @@ export default function Sidebar() {
                     <IconButton>
                         <MoreVertIcon />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={logout}>
                         <LogoutIcon />
                     </IconButton>
                 </div>
